@@ -2,58 +2,68 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Bug Wing Simulator</title>
+    <title>BumbleBeeSim</title>
     <link rel="stylesheet" href="/static/styles.css">
 </head>
 
 <body>
     <div class="container">
-        <h1>Bug Wing Oscillating Wing Simulator</h1>
 
-        <!-- -------------------- INPUT GRID -------------------- -->
+        <h1 class="main-title">BumbleBeeSim</h1>
+        <h2 class="subtitle">Unsteady Aerodynamics of Oscillating Airfoil Simulator</h2>
+
         <div class="input-grid">
 
             <div class="input-group">
-                <label for="freq">Frequency (Hz)</label>
-                <input type="number" id="freq" value="150" step="1">
+                <label>Frequency (Hz)</label>
+                <input type="number" id="freq" value="150">
             </div>
 
             <div class="input-group">
-                <label for="pitch">Pitch (deg)</label>
-                <input type="number" id="pitch" value="45" step="1">
+                <label>Pitch (deg)</label>
+                <input type="number" id="pitch" value="45">
             </div>
 
             <div class="input-group">
-                <label for="stroke">Stroke Amplitude (m)</label>
-                <input type="number" id="stroke" value="0.01" step="0.001">
+                <label>Sweep Step (deg or Hz)</label>
+                <input type="number" id="step" value="15">
             </div>
 
             <div class="input-group">
-                <label for="step">Sweep Step (deg or Hz)</label>
-                <input type="number" id="step" value="15" step="1">
-            </div>
-
-            <div class="input-group">
-                <label for="t_end">Study Duration (s)</label>
-                <input type="number" id="t_end" value="0.02" step="0.01">
+                <label>Simulation Length (s)</label>
+                <input type="number" id="tend" value="0.03" step="0.01">
             </div>
 
         </div>
 
-        <!-- -------------------- BUTTONS -------------------- -->
         <div class="button-row">
             <button onclick="runSingle()">Run Single Simulation</button>
             <button onclick="runPitchSweep()">Run Pitch Sweep</button>
             <button onclick="runFreqSweep()">Run Frequency Sweep</button>
         </div>
 
-        <!-- -------------------- OUTPUT PLOT -------------------- -->
         <div id="plot-area">
-            <h2>Simulation Output</h2>
-            <img id="plot-img" src="" alt="Simulation plot will appear here">
+            <h2>Output Plot</h2>
+            <img id="plot-img" src="">
         </div>
 
     </div>
+
+    <style>
+        .main-title {
+            font-size: 3rem;
+            margin-bottom: 0;
+            text-align: center;
+        }
+        .subtitle {
+            font-size: 1.3rem;
+            margin-top: 0.2rem;
+            margin-bottom: 1.5rem;
+            text-align: center;
+            font-weight: 300;
+            opacity: 0.85;
+        }
+    </style>
 
     <script src="/static/script.js"></script>
 </body>
