@@ -1,17 +1,21 @@
+"""
+Flapping-wing simulation FastAPI backend.
+"""
+
+from run_simulation import base_params
+from physics import quasi_steady_flap
+from pydantic import BaseModel
+from fastapi.staticfiles import StaticFiles
+from fastapi.responses import FileResponse
+from fastapi import FastAPI
+import matplotlib.pyplot as plt
 import io
 import base64
 import numpy as np
 import matplotlib
 matplotlib.use("Agg")
-import matplotlib.pyplot as plt
 
-from fastapi import FastAPI
-from fastapi.responses import FileResponse
-from fastapi.staticfiles import StaticFiles
-from pydantic import BaseModel
-
-from physics import quasi_steady_flap
-from run_simulation import base_params
+# Local project imports (must still be above any executable code)
 
 
 # ------------------------- FastAPI Setup -------------------------
@@ -135,12 +139,12 @@ def sweep_steps(req: SweepStepsRequest):
         if req.sweep_type == "pitch":
             params["pitch_amp"] = np.deg2rad(val)
             params["f"] = req.freq_hz
-            legend_unit = "deg"
+            unit = "deg"
 
         elif req.sweep_type == "frequency":
             params["pitch_amp"] = np.deg2rad(req.pitch_deg)
             params["f"] = val
-            legend_unit = "Hz"
+            unit = "Hz"
 
         r = quasi_steady_flap(params)
 
@@ -148,7 +152,7 @@ def sweep_steps(req: SweepStepsRequest):
             r["t"],
             r["L"],
             color=colors[idx],
-            label=f"{val} {legend_unit}"
+            label=f"{val} {unit}"
         )
         axs[0, 1].plot(r["t"], r["D"], color=colors[idx])
         axs[1, 0].plot(r["t"], r["P"], color=colors[idx])
@@ -172,7 +176,7 @@ def sweep_steps(req: SweepStepsRequest):
 
     axs[0, 0].legend(
         loc="upper center",
-        bbox_to_anchor=(0.5, -0.15),
+        bbox_to_anchor=(0.5, -0.2),
         ncol=3
     )
 
