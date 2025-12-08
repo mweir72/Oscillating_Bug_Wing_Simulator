@@ -1,0 +1,11 @@
+services:
+  - type: web
+    name: bug-wing-simulator
+    env: docker
+    plan: starter
+    autoDeploy: true
+    dockerfilePath: ./Dockerfile
+    healthCheckPath: /
+    envVars:
+      - key: PORT
+        value: 8000

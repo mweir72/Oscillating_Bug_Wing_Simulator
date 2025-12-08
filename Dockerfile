@@ -1,21 +1,24 @@
 # Use a slim Python base image
 FROM python:3.10-slim AS base
 
-# Set a non-root user for security
+# Create non-root user
 RUN useradd -m appuser
 USER appuser
 
 # Set working directory
 WORKDIR /app
 
-# Copy requirement file first (better caching)
+# Copy requirements first (cache optimization)
 COPY --chown=appuser:appuser requirements.txt .
 
-# Install Python dependencies safely
+# Install dependencies
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Copy the application code
+# Copy all project files
 COPY --chown=appuser:appuser . .
 
-# Default command (can be overridden)
-CMD ["python", "run_simulation.py"]
+# Expose the FastAPI port
+EXPOSE 8000
+
+# Default command: start FastAPI with uvicorn
+CMD ["python", "-m", "uvicorn", "api:app", "--host", "0.0.0.0", "--port", "8000"]
