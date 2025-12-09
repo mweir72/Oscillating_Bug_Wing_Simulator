@@ -1,4 +1,3 @@
-// Wrap everything so Safari only runs after DOM is ready
 document.addEventListener("DOMContentLoaded", () => {
     console.log("BumbleBeeSim script loaded (DOM ready)");
 
