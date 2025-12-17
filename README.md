@@ -1,6 +1,14 @@
-# BumbleBeeSim
+# OscillatingAirfoilSim
 
-Interactive environment for assessing quasi-steady aerodynamics of oscillating airfoils inspired by insect wing motion. The FastAPI backend exposes a parameterized solver while the browser client renders multi-panel diagnostics describing aerodynamic loads, power requirements, and energetic efficiency.
+OscillatingAirfoilSim is a physics-based simulation framework for
+time-domain analysis of oscillating airfoils in unsteady flow regimes.
+The solver implements quasi-steady aerodynamic formulations to evaluate
+lift, drag, power consumption, and efficiency under prescribed pitching
+and plunging kinematics.
+
+The FastAPI backend exposes a parameterized simulation engine, while a
+browser-based client renders multi-panel diagnostics for rapid
+exploration of dynamic aerodynamic behavior.
 
 **Live demo:** [BumbleBeeSim.onrender.com](https://bumblebeesim.onrender.com)  
 **Stack:** FastAPI · NumPy · Matplotlib · Vanilla JS · Render
@@ -8,10 +16,12 @@ Interactive environment for assessing quasi-steady aerodynamics of oscillating a
 ---
 
 ## Key capabilities
-- Returns full wingbeat histories for lift, drag, power, and efficiency in a single API call.
-- Web interface supports both single-run analyses and structured pitch/frequency sweeps.
-- Solver reflects standard quasi-steady formulations (Dickinson, Sane & Dickinson, Hoerner, Theodorsen) for rapid evaluation without resorting to CFD.
-- Server-rendered matplotlib panels ensure consistent visualization across deployments.
+- Returns full oscillation-cycle histories for lift, drag, power, and efficiency in a single API call.
+- Web interface supports both single-run analyses and structured pitch and frequency sweeps.
+- Solver implements standard quasi-steady unsteady-airfoil formulations
+  (Dickinson; Sane & Dickinson; Hoerner; Theodorsen) for rapid evaluation
+  without resorting to CFD.
+- Server-rendered Matplotlib panels ensure consistent visualization across deployments.
 
 ---
 
@@ -60,7 +70,13 @@ Available actions:
 ---
 
 ## Physics model
-The wing is approximated as a rigid flat plate undergoing sinusoidal plunge (stroke) and sinusoidal pitch with a configurable phase offset (not available in web app). Aerodynamic forces comprise the following terms:
+The airfoil is modeled as a rigid flat plate undergoing prescribed
+sinusoidal plunge and pitch motion with multiple configurable parameters
+when ran locally.
+
+Aerodynamic forces are computed using quasi-steady aerodynamic model
+with contributions from translational lift, rotational lift,
+and added-mass effects.
 
 - **Lift**  
   `L = L_trans + L_rot + L_added_mass`
@@ -71,11 +87,15 @@ The wing is approximated as a rigid flat plate undergoing sinusoidal plunge (str
 - **Efficiency**  
   `η = (L · U) / P`
 
-Parameters governing dynamic pressure corrections, rotational lift augmentation, and added-mass response are consistent with quasi-steady insect flight literature (Dickinson et al., Sane & Dickinson, Hoerner, Theodorsen).
-
+Model coefficients governing dynamic pressure corrections, rotational
+lift augmentation, and added-mass response are consistent with
+established unsteady-airfoil and bio-inspired flight literature.
 ---
 
-## Default bumblebee setup
+## Default reference configuration
+
+The default parameters correspond to a small-scale, low-Reynolds-number
+reference case representative of bio-inspired flight regimes.
 
 | Parameter | Value |
 | --- | --- |
