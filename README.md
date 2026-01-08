@@ -25,6 +25,25 @@ exploration of dynamic aerodynamic behavior.
 
 ---
 
+## Assumptions & Limitations
+
+**Assumptions**
+- Flow treated as quasi-steady; instantaneous forces depend on instantaneous motion without full wake modeling
+- Wing modeled as a rigid flat plate with constant chord and area
+- Leading-edge vortex effects modeled via a stall-delay multiplier, not explicit vortex dynamics
+- Neglects 3D tip vortices, wing–wake interaction, and circulation history
+- Air assumed incompressible
+- Power estimate neglects inertial wing-mass power
+
+**Limitations**
+- Cannot resolve true vortex shedding, LEV attachment/detachment, or spanwise flow
+- Over-simplified rotational lift and added-mass coupling near stroke reversal
+- Efficiency results exclude mechanical losses and inertial work associated with real flapping mechanisms
+- Assumes symmetric sinusoidal kinematics
+- Absolute force and efficiency magnitudes may differ from biological systems; the simulator is intended for comparative trend analysis
+
+---
+
 ## Quick start
 1. **Install requirements**
    ```bash
@@ -90,7 +109,6 @@ and added-mass effects.
 Model coefficients governing dynamic pressure corrections, rotational
 lift augmentation, and added-mass response are consistent with
 established unsteady-airfoil and bio-inspired flight literature.
----
 
 ## Default reference configuration
 
